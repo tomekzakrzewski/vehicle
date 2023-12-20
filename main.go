@@ -18,10 +18,10 @@ func main() {
 	p := tea.NewProgram(m, tea.WithAltScreen())
 
 	_, err := p.Run()
+
 	if err != nil {
 		log.Fatalln(err)
 	}
-
 }
 
 type Model struct {
@@ -127,7 +127,6 @@ func handleVinSearch(q string) tea.Cmd {
 		return VinResponseMsg{
 			VinResponse: vinResponse,
 		}
-
 	}
 }
 
