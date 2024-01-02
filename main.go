@@ -105,7 +105,9 @@ func handleVinSearch(q string) tea.Cmd {
 				Err: err,
 			}
 		}
+
 		res, err := http.DefaultClient.Do(req)
+
 		if err != nil {
 			return VinResponseMsg{
 				Err: err,
