@@ -85,6 +85,7 @@ func (m Model) View() string {
 		s += "Drive type: " + m.vinResponse.Results[0].DriveType + "\n\n"
 		s += "Fuel: " + m.vinResponse.Results[0].FuelTypePrimary + "\n\n"
 		s += "Seats: " + m.vinResponse.Results[0].Seats + "\n\n"
+		s += "Transmission" + m.vinResponse.Results[0].TransmissionStyle + "\n\n"
 	}
 
 	return s
@@ -134,21 +135,22 @@ func handleVinSearch(q string) tea.Cmd {
 
 type VinResponse struct {
 	Results []struct {
-		BodyClass       string `json:"BodyClass"`
-		DisplacementL   string `json:"DisplacementL"`
-		Doors           string `json:"Doors"`
-		DriveType       string `json:"DriveType"`
-		EngineCycles    string `json:"EngineCycles"`
-		EngineCylinders string `json:"EngineCylinders"`
-		EngineHP        string `json:"EngineHP"`
-		FuelTypePrimary string `json:"FuelTypePrimary"`
-		Make            string `json:"Make"`
-		Manufacturer    string `json:"Manufacturer"`
-		Model           string `json:"Model"`
-		ModelYear       string `json:"ModelYear"`
-		SeatRows        string `json:"SeatRows"`
-		Seats           string `json:"Seats"`
-		VehicleType     string `json:"VehicleType"`
+		BodyClass         string `json:"BodyClass"`
+		DisplacementL     string `json:"DisplacementL"`
+		Doors             string `json:"Doors"`
+		DriveType         string `json:"DriveType"`
+		EngineCycles      string `json:"EngineCycles"`
+		EngineCylinders   string `json:"EngineCylinders"`
+		EngineHP          string `json:"EngineHP"`
+		FuelTypePrimary   string `json:"FuelTypePrimary"`
+		Make              string `json:"Make"`
+		Manufacturer      string `json:"Manufacturer"`
+		Model             string `json:"Model"`
+		ModelYear         string `json:"ModelYear"`
+		SeatRows          string `json:"SeatRows"`
+		Seats             string `json:"Seats"`
+		VehicleType       string `json:"VehicleType"`
+		TransmissionStyle string `json:"TransmissionStyle"`
 	} `json:"Results"`
 }
 
