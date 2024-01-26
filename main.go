@@ -85,7 +85,7 @@ func (m Model) View() string {
 		s += "Drive type: " + m.vinResponse.Results[0].DriveType + "\n\n"
 		s += "Fuel: " + m.vinResponse.Results[0].FuelTypePrimary + "\n\n"
 		s += "Seats: " + m.vinResponse.Results[0].Seats + "\n\n"
-		s += "Transmission" + m.vinResponse.Results[0].TransmissionStyle + "\n\n"
+		s += "Transmission: " + m.vinResponse.Results[0].TransmissionStyle + "\n\n"
 	}
 
 	return s
