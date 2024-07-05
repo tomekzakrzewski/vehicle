@@ -18,7 +18,6 @@ func main() {
 	p := tea.NewProgram(m, tea.WithAltScreen())
 
 	_, err := p.Run()
-
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -58,6 +57,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		switch msg.Type {
 		case tea.KeyEnter:
 			v := m.textinput.Value()
+			m.textinput.Reset()
 			return m, handleVinSearch(v)
 		}
 
@@ -93,14 +93,16 @@ func (m Model) View() string {
 
 func handleVinSearch(q string) tea.Cmd {
 	return func() tea.Msg {
-		url := fmt.Sprintf("https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/%s?format=json", q)
+		url := fmt.Sprintf(
+			"https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/%s?format=json",
+			q,
+		)
 
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 
 		defer cancel()
 
 		req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
-
 		if err != nil {
 			return VinResponseMsg{
 				Err: err,
@@ -108,7 +110,6 @@ func handleVinSearch(q string) tea.Cmd {
 		}
 
 		res, err := http.DefaultClient.Do(req)
-
 		if err != nil {
 			return VinResponseMsg{
 				Err: err,
@@ -120,7 +121,6 @@ func handleVinSearch(q string) tea.Cmd {
 		var vinResponse VinResponse
 
 		err = json.NewDecoder(res.Body).Decode(&vinResponse)
-
 		if err != nil {
 			return VinResponseMsg{
 				Err: err,
